@@ -1,0 +1,121 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 15px;
+    gap: 10px;
+    width: 500px;
+    height: 200px;
+    padding: 20px 20px;
+}
+
+.digits-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.colon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+
+.colon::before,
+.colon::after {
+    position: absolute;
+    content: "";
+    background-color: rgb(0, 160, 255);
+    border-radius: 50px;
+    width: 20px;
+    aspect-ratio: 1 / 1;
+}
+
+.colon::before {
+    top: 20px;
+}
+
+.colon::after {
+    bottom: 20px;
+}
+
+.segments {
+    display: grid;
+    align-items: center;
+    grid-template-areas: 
+        "... top"
+        "top-left top-right"
+        "... middle"
+        "bottom-left bottom-right"
+        "... bottom";
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1.5;
+}
+
+.segment {
+    background-color: rgba(0, 160, 255, 0.25);
+    width: 55px;
+    height: 15px;
+}
+
+.segment.active {
+    background-color: rgb(0, 160, 255);
+}
+
+.segment:nth-child(1) {
+    grid-area: top;
+    transform: translateX(-50%);
+}
+
+.segment:nth-child(2) {
+    grid-area: top-right;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(3) {
+    grid-area: bottom-right;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(4) {
+    grid-area: bottom;
+    transform: translateX(-50%);
+}
+
+.segment:nth-child(5) {
+    grid-area: bottom-left;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(6) {
+    grid-area: top-left;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(7) {
+    grid-area: middle;
+    transform: translateX(-50%);
+}
