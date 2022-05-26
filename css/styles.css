@@ -24,6 +24,7 @@ body {
     width: 500px;
     height: 200px;
     padding: 20px 20px;
+    box-shadow: 0px 0px 10px black;
 }
 
 .digits-container {
@@ -79,6 +80,7 @@ body {
     background-color: rgba(0, 160, 255, 0.25);
     width: 55px;
     height: 15px;
+    clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
 }
 
 .segment.active {
