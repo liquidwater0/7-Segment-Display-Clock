@@ -32,6 +32,8 @@ function displayTime({ hour, minutes }) {
 
     //Hours Section
     [...hourContainer.children[0].children].forEach((segment, index) => {
+        if (hourDigit1 === "0") return;
+
         const segmentParts = digits.get(hourDigit1);
         segment.classList.toggle("active", segmentParts[index] === 1);
     });
