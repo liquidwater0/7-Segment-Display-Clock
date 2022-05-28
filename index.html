@@ -4,11 +4,21 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/main.css">
         <title>7 Segment Display Clock</title>
     </head>
     <body>
+        <div class="format-switch-container">
+            <div class="format-switch-text">Format:</div>
+            <button class="format-switch-button" id="formatSwitchButton"></button>
+        </div>
+
         <div class="clock">
+            <div class="pm-indicator-container">
+                <div class="pm-indicator-text">PM</div>
+                <div class="pm-indicator" data-pm-indicator></div>
+            </div>
+
             <div class="digits-container" id="hour">
                 <div class="segments">
                     <div class="segment"></div>
@@ -54,6 +64,6 @@
             </div>
         </div>
 
-        <script src="js/index.js"></script>
+        <script src="js/main.js" type="module"></script>
     </body>
 </html>
