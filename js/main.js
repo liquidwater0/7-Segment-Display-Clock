@@ -1,12 +1,12 @@
 import { updateClock } from "./clock.js";
 
+document.addEventListener("DOMContentLoaded", setFormat);
 window.requestAnimationFrame(updateClock);
 
 const formatSwitchButton = document.getElementById("formatSwitchButton");
 formatSwitchButton.addEventListener("click", changeFormat);
 
 let format = localStorage.getItem("7_Segment_Clock_Format") || "12h";
-setFormat();
 
 function changeFormat() {
     switch (format) {
