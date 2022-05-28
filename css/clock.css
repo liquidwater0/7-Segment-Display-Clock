@@ -1,0 +1,121 @@
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 15px;
+    width: 500px;
+    height: 200px;
+    padding: 20px 20px;
+    box-shadow: 0px 0px 10px black;
+}
+
+.pm-indicator-container {
+    display: none;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pm-indicator-text {
+    color: white;
+}
+
+.pm-indicator {
+    background-color: var(--primary-color-inactive);
+    width: 20px;
+    margin-top: 25px;
+    border-radius: 50px;
+    aspect-ratio: 1 / 1;
+}
+
+.digits-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.colon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+
+.colon::before,
+.colon::after {
+    position: absolute;
+    content: "";
+    background-color: var(--primary-color-active);
+    border-radius: 50px;
+    width: 20px;
+    aspect-ratio: 1 / 1;
+}
+
+.colon::before {
+    top: 20px;
+}
+
+.colon::after {
+    bottom: 20px;
+}
+
+.segments {
+    display: grid;
+    align-items: center;
+    grid-template-areas: 
+        "... top"
+        "top-left top-right"
+        "... middle"
+        "bottom-left bottom-right"
+        "... bottom";
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1.5;
+}
+
+.segment {
+    background-color: var(--primary-color-inactive);
+    width: 55px;
+    height: 15px;
+    clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
+}
+
+.segment:nth-child(1) {
+    grid-area: top;
+    transform: translateX(-50%);
+}
+
+.segment:nth-child(2) {
+    grid-area: top-right;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(3) {
+    grid-area: bottom-right;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(4) {
+    grid-area: bottom;
+    transform: translateX(-50%);
+}
+
+.segment:nth-child(5) {
+    grid-area: bottom-left;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(6) {
+    grid-area: top-left;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(7) {
+    grid-area: middle;
+    transform: translateX(-50%);
+}

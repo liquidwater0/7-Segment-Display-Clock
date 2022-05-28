@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(clock.css);
+
+:root {
+    --primary-color-active: rgb(0, 160, 255);
+    --primary-color-inactive: rgba(0, 160, 255, 0.25);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 33px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.format-switch-container {
+    display: none;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.format-switch-text {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+}
+
+.format-switch-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(150, 100%, calc(var(--lightness, 50) * 1%));
+    width: 65px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 50px;
+    aspect-ratio: 1 / 1;
+    transition: background-color 200ms;
+}
+
+.format-switch-button:hover {
+    --lightness: 45;
+}
+
+.active {
+    background-color: var(--primary-color-active) !important;
+}
