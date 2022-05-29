@@ -13,6 +13,7 @@ const useSecondsButton = document.getElementById("useSecondsButton");
 formatSwitchButton.addEventListener("click", changeFormat);
 useSecondsButton.addEventListener("click", changeSeconds);
 
+//Format Option
 let format = localStorage.getItem("7_Segment_Clock_Format") || "12h";
 
 function changeFormat() {
@@ -30,39 +31,22 @@ function changeFormat() {
 }
 
 function setFormat() {
-    if (format === "24h") {
-        formatSwitchButton.style.setProperty("--hue", 110);
-    } else {
-        formatSwitchButton.style.setProperty("--hue", null);
-    }
-
+    formatSwitchButton.style.setProperty("--hue", (format === "24h") ? 110 : null);
     formatSwitchButton.textContent = format;
 }
 
-let useSeconds = localStorage.getItem("7_Segment_Clock_Use_Seconds") || "Yes";
+//Seconds Option
+let useSeconds = JSON.parse(localStorage.getItem("7_Segment_Clock_Use_Seconds"));
+if (useSeconds === null) useSeconds = true;
 
 function changeSeconds() {
-    switch (useSeconds) {
-        case "Yes":
-            useSeconds = "No"
-            break;
-        case "No":
-            useSeconds = "Yes"
-            break;
-    }
-
+    useSeconds = !useSeconds;
     setSeconds();
     localStorage.setItem("7_Segment_Clock_Use_Seconds", useSeconds);
 }
 
 function setSeconds() {
-    if (useSeconds === "No") {
-        useSecondsButton.style.setProperty("--hue", 15);
-        useSecondsButton.style.color = "white";
-    } else {
-        useSecondsButton.style.setProperty("--hue", null);
-        useSecondsButton.style.color = "";
-    }
-
-    useSecondsButton.textContent = useSeconds;
+    useSecondsButton.style.setProperty("--hue", (useSeconds == true) ? null : 15);
+    useSecondsButton.style.color = (useSeconds == true) ? "" : "white";
+    useSecondsButton.textContent = (useSeconds == true) ? "Yes" : "No";
 }
