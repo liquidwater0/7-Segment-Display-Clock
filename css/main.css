@@ -30,7 +30,7 @@ button {
     cursor: pointer;
 }
 
-.options-container {
+.option-container {
     display: none;
     /* display: flex; */
     justify-content: center;
