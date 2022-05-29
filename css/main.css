@@ -30,7 +30,7 @@ button {
     cursor: pointer;
 }
 
-.format-switch-container {
+.options-container {
     display: none;
     /* display: flex; */
     justify-content: center;
@@ -38,17 +38,17 @@ button {
     gap: 50px;
 }
 
-.format-switch-text {
+.option-text {
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 1.1px;
 }
 
-.format-switch-button {
+.option-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(150, 100%, calc(var(--lightness, 50) * 1%));
+    background-color: hsl(var(--hue, 150), 100%, calc(var(--lightness, 50) * 1%));
     width: 65px;
     font-size: 18px;
     font-weight: 500;
@@ -57,7 +57,7 @@ button {
     transition: background-color 200ms;
 }
 
-.format-switch-button:hover {
+.option-button:hover {
     --lightness: 45;
 }
 
