@@ -14,7 +14,7 @@ formatSwitchButton.addEventListener("click", changeFormat);
 useSecondsButton.addEventListener("click", changeSeconds);
 
 //Format Option
-let format = localStorage.getItem("7_Segment_Clock_Format") || "12h";
+export let format = localStorage.getItem("7_Segment_Clock_Format") || "12h";
 
 function changeFormat() {
     switch (format) {
@@ -32,7 +32,7 @@ function changeFormat() {
 
 function setFormat() {
     const pmIndicatorContainer = document.getElementById("pmIndicatorContainer");
-
+    
     pmIndicatorContainer.style.display = (format === "12h") ? "flex" : "none";
     formatSwitchButton.style.setProperty("--hue", (format === "24h") ? 110 : null);
     formatSwitchButton.textContent = format;
