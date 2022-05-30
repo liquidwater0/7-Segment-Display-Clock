@@ -31,6 +31,9 @@ function changeFormat() {
 }
 
 function setFormat() {
+    const pmIndicatorContainer = document.getElementById("pmIndicatorContainer");
+
+    pmIndicatorContainer.style.display = (format === "12h") ? "flex" : "none";
     formatSwitchButton.style.setProperty("--hue", (format === "24h") ? 110 : null);
     formatSwitchButton.textContent = format;
 }
@@ -46,6 +49,11 @@ function changeSeconds() {
 }
 
 function setSeconds() {
+    const secondsSection = document.querySelectorAll(".seconds-section");
+    secondsSection.forEach(element => {
+        element.style.display = (useSeconds == true) ? "flex" : "none";
+    });
+
     useSecondsButton.style.setProperty("--hue", (useSeconds == true) ? null : 15);
     useSecondsButton.style.color = (useSeconds == true) ? "" : "white";
     useSecondsButton.textContent = (useSeconds == true) ? "Yes" : "No";
