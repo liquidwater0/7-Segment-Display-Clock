@@ -1,6 +1,9 @@
+import { format } from "./main.js";
+
 const hourContainer = document.getElementById("hour");
 const minutesContainer = document.getElementById("minutes");
 const secondsContainer = document.getElementById("seconds");
+const pmIndicator = document.querySelector("[data-pm-indicator]");
 
 const digits = new Map([
     ["0", [1, 1, 1, 1, 1, 1, 0]],
@@ -15,12 +18,36 @@ const digits = new Map([
     ["9", [1, 1, 1, 1, 0, 1, 1]]
 ]);
 
+function format12h(hour) {
+    const hourAsNumber = Number(hour);
+    let formatted;
+
+    if (hourAsNumber == 0 || hourAsNumber == 12) {
+        formatted = 12;
+    } else {
+        formatted = hourAsNumber % 12;
+    }
+
+    return {
+        hourFormatted: String(formatted).padStart(2, "0"),
+        amPM: (hourAsNumber >= 12) ? "pm" : "am"
+    }
+}
+
 export function updateClock() {
     const now = new Date();
-    const hour = String(now.getHours()).padStart(2, "0");
+    let hour = String(now.getHours()).padStart(2, "0");
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const seconds = String(now.getSeconds()).padStart(2, "0");
+    const { hourFormatted, amPM } = format12h(hour);
     
+    if (format === "12h") {
+        hour = hourFormatted;
+        pmIndicator.classList.toggle("active", (amPM === "pm") ? true : false);
+    } else {
+        hour = String(now.getHours()).padStart(2, "0");
+    }
+
     displayTime({ hour, minutes, seconds });
 
     window.requestAnimationFrame(updateClock);
@@ -33,6 +60,7 @@ function displayTime({ hour, minutes, seconds }) {
 
     //Hours Section
     [...hourContainer.children[0].children].forEach((segment, index) => {
+        segment.classList.remove("active");
         if (hourDigit1 === "0") return;
 
         const segmentParts = digits.get(hourDigit1);
