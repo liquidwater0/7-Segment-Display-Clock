@@ -1,4 +1,4 @@
-import { format } from "./main.js";
+import { settings } from "./settings.js";
 
 const hourContainer = document.getElementById("hour");
 const minutesContainer = document.getElementById("minutes");
@@ -40,8 +40,8 @@ export function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const seconds = String(now.getSeconds()).padStart(2, "0");
     const { hourFormatted, amPM } = format12h(hour);
-    
-    if (format === "12h") {
+
+    if (settings.format === "12h") {
         hour = hourFormatted;
         pmIndicator.classList.toggle("active", (amPM === "pm") ? true : false);
     } else {
