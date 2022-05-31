@@ -1,10 +1,7 @@
+import { settings, saveSettings } from "./settings.js";
 import { updateClock } from "./clock.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    setFormat();
-    setSeconds();
-});
-
+document.addEventListener("DOMContentLoaded", updateUI);
 window.requestAnimationFrame(updateClock);
 
 const formatSwitchButton = document.getElementById("formatSwitchButton");
@@ -14,7 +11,7 @@ formatSwitchButton.addEventListener("click", changeFormat);
 useSecondsButton.addEventListener("click", changeSeconds);
 
 //Format Option
-export let format = localStorage.getItem("7_Segment_Clock_Format") || "12h";
+let format = settings.format;
 
 function changeFormat() {
     switch (format) {
@@ -26,35 +23,33 @@ function changeFormat() {
             break;
     }
 
-    setFormat();
-    localStorage.setItem("7_Segment_Clock_Format", format);
-}
-
-function setFormat() {
-    const pmIndicatorContainer = document.getElementById("pmIndicatorContainer");
-    
-    pmIndicatorContainer.style.display = (format === "12h") ? "flex" : "none";
-    formatSwitchButton.style.setProperty("--hue", (format === "24h") ? 110 : null);
-    formatSwitchButton.textContent = format;
+    settings.format = format;
+    updateUI();
+    saveSettings();
 }
 
 //Seconds Option
-let useSeconds = JSON.parse(localStorage.getItem("7_Segment_Clock_Use_Seconds"));
-if (useSeconds === null) useSeconds = true;
+let showSeconds = settings.showSeconds;
 
 function changeSeconds() {
-    useSeconds = !useSeconds;
-    setSeconds();
-    localStorage.setItem("7_Segment_Clock_Use_Seconds", useSeconds);
+    showSeconds = !showSeconds;
+    settings.showSeconds = showSeconds;
+    updateUI();
+    saveSettings();
 }
 
-function setSeconds() {
+function updateUI() {
+    const pmIndicatorContainer = document.getElementById("pmIndicatorContainer");
     const secondsSection = document.querySelectorAll(".seconds-section");
+
     secondsSection.forEach(element => {
-        element.style.display = (useSeconds == true) ? "flex" : "none";
+        element.style.display = (showSeconds == true) ? "flex" : "none";
     });
 
-    useSecondsButton.style.setProperty("--hue", (useSeconds == true) ? null : 15);
-    useSecondsButton.style.color = (useSeconds == true) ? "" : "white";
-    useSecondsButton.textContent = (useSeconds == true) ? "Yes" : "No";
+    pmIndicatorContainer.style.display = (format === "12h") ? "flex" : "none";
+    formatSwitchButton.style.setProperty("--hue", (format === "24h") ? 110 : null);
+    formatSwitchButton.textContent = format;
+    useSecondsButton.style.setProperty("--hue", (showSeconds == true) ? null : 15);
+    useSecondsButton.style.color = (showSeconds == true) ? "" : "white";
+    useSecondsButton.textContent = (showSeconds == true) ? "Yes" : "No";
 }
