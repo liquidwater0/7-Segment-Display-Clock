@@ -1,0 +1,152 @@
+.clock {
+    --active-color: hsl(200, 100%, 50%);
+    --inactive-color: hsl(200, 100%, 15%);
+    --colon-spacing: 1.75rem;
+
+    position: relative;
+    display: flex;
+    background-color: black;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    user-select: none;
+    
+    .toggles {
+        position: absolute;
+        display: flex;
+        align-items: flex-end;
+        bottom: 100%;
+        gap: 75px;
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            p {
+                width: max-content;
+                position: absolute;
+                bottom: 35px;
+            }
+        }
+    }
+
+    .clock-button {
+        width: 45px;
+        height: 10px;
+        background-color: hsl(150, 100%, 45%);
+        border-radius: 0.5em 0.5em 0px 0px;
+        color: white;
+        outline: none;
+        border: none;
+
+        &.pressed {
+            height: 7px;
+            background-color: hsl(100, 100%, 50%);
+        }
+    }
+
+    .am-pm-indicator {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        color: white;
+
+        &.active::after {
+            background-color: var(--active-color);
+        }
+
+        &::after {
+            content: "";
+            background-color: var(--inactive-color);
+            border-radius: 10000px;
+            width: 20px;
+            aspect-ratio: 1 / 1;
+        }
+    }
+
+    .digit {
+        position: relative;
+        display: flex;
+        height: 150px;
+
+        &:not(:last-child) {
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                background-color: var(--active-color);
+                width: 20px;
+                border-radius: 1000px;
+                right: -0.6rem;
+                aspect-ratio: 1 / 1;
+            }
+
+            &::before {
+                top: var(--colon-spacing);
+            }
+
+            &::after {
+                bottom: var(--colon-spacing);
+            }
+        }
+
+        .segments {
+            display: grid;
+            grid-template-areas: 
+                "... top"
+                "top-left top-right"
+                "... middle"
+                "bottom-left bottom-right"
+                "... bottom";
+            align-items: center;
+
+            .segment {
+                width: 55px;
+                height: 15px;
+                clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
+                background-color: var(--inactive-color);
+
+                &.active {
+                    background-color: var(--active-color);
+                }
+
+                &:nth-child(1) {
+                    grid-area: top;
+                    transform: translateX(-50%);
+                }
+                
+                &:nth-child(2) {
+                    grid-area: top-right;
+                    transform: rotate(90deg);
+                }
+                
+                &:nth-child(3) {
+                    grid-area: bottom-right;
+                    transform: rotate(90deg);
+                }
+                
+                &:nth-child(4) {
+                    grid-area: bottom;
+                    transform: translateX(-50%);
+                }
+                
+                &:nth-child(5) {
+                    grid-area: bottom-left;
+                    transform: rotate(90deg);
+                }
+                
+                &:nth-child(6) {
+                    grid-area: top-left;
+                    transform: rotate(90deg);
+                }
+                
+                &:nth-child(7) {
+                    grid-area: middle;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+    }
+}
